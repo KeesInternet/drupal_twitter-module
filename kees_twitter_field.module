@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Allows the creation of a Twitter field.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function kees_twitter_field_theme($existing, $type, $theme, $path) {
+  return [
+    'kees_twitter_field_template' => [
+      'variables' => ['test_var' => NULL],
+    ],
+  ];
+}

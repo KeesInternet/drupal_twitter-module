@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Custom override for Kees Twitter Field.
+ *
+ * Available variables:
+ * - tweet.text: plain Tweet message.
+ * - tweet.entities.media: images used in tweet
+ * - tweet.user: user info 
+ *
+ */
+#}
+{% if items.0.content.attributes == "hashtag" %}
+  {% set tweets = items.0.content.tweets.0 %}
+{% else %}
+  {% set tweets = items.0.content.tweets %}
+{% endif %}
+  <h2> Resultaten voor : {{ items.0.content.filter}}</h2>
+
+{% for tweet in tweets %}
+  <img src="{{ tweet.user.profile_image_url }}">
+  <p> {{ tweet.user.name }} <i>@{{ tweet.user.screen_name }}</i></p>
+  <p>{{ tweet.text }}</p>
+  <img src="{{ tweet.entities.media.0.media_url }}" height="200px" width="100px">
+
+{% endfor %}
+
+

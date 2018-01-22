@@ -1,0 +1,9 @@
+# Package info
+type: module
+name: Kees Twitter Field
+description: Custom Kees Twitter field.
+core: 8.x
+
+# Dependencies
+dependences:
+  - field
