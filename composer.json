@@ -1,5 +1,5 @@
 {
-    "name": "keestm/twitter-module",
+    "name": "keestm/twitter-field",
     "description": "A Drupal 8 module that loads a twitter feed",
     "type": "drupal-module",
     "license": "MIT",

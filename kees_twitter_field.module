@@ -16,7 +16,9 @@ function kees_twitter_field_theme($existing, $type, $theme, $path) {
     'kees_twitter_field_formatter' => [
       'template' => 'field--kees-twitter-field',
       'variables' => [
-        "content" => NULL,
+        "tweets" => NULL,
+        "type" => NULL,
+        "filter" => NULL,
       ],
     ],
   ];

@@ -1,6 +1,5 @@
 kees_twitter_field.twitter_api:
-  title: 'Twitter API'
+  title: 'Kees-TM Twitter API settings'
   description: 'Twitter Authentication settings'
-  parent: system.admin_config_services
   route_name: kees_twitter_field.twitter_api
-  weight: 100
+  parent: 'system.admin_config_development'
