@@ -1,7 +1,7 @@
 # Package info
 type: module
 name: Kees Twitter Field
-description: Custom Kees Twitter field.
+description: Custom Kees-TM Twitter field.
 version: 1.1
 core: 8.x
 
