@@ -10,8 +10,14 @@
  */
 function kees_twitter_field_theme($existing, $type, $theme, $path) {
   return [
-    'kees_twitter_field_template' => [
-      'variables' => ['test_var' => NULL],
+    'kees_twitter_field' => [
+      'variables' => [],
+    ],
+    'kees_twitter_field_formatter' => [
+      'template' => 'field--kees-twitter-field',
+      'variables' => [
+        "content" => NULL,
+      ],
     ],
   ];
 }

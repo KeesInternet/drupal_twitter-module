@@ -6,11 +6,11 @@
  * Available variables:
  * - tweet.text: plain Tweet message.
  * - tweet.entities.media: images used in tweet
- * - tweet.user: user info 
+ * - tweet.user: user info
  *
  */
 #}
-{% if items.0.content.attributes == "hashtag" %}
+{# {% if items.0.content.attributes == "hashtag" %}
   {% set tweets = items.0.content.tweets.0 %}
 {% else %}
   {% set tweets = items.0.content.tweets %}
@@ -23,6 +23,7 @@
   <p>{{ tweet.text }}</p>
   <img src="{{ tweet.entities.media.0.media_url }}" height="200px" width="100px">
 
-{% endfor %}
+{% endfor %} #}
+{{ kint() }}
 
-
+hot

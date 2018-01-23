@@ -1,0 +1,15 @@
+{
+    "name": "keestm/twitter-module",
+    "description": "A Drupal 8 module that loads a twitter feed",
+    "type": "drupal-module",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Kees-TM"
+        }
+    ],
+    "require": {
+        "abraham/twitteroauth": "^0.7.4"
+    }
+}

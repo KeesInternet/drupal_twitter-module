@@ -31,35 +31,35 @@ class Kees_twitter_fieldDefaultFormatter extends FormatterBase {
     $settings['consumer_secret'] = $config->get('consumer_secret');
 
     $output = [];
+    $build["#theme"] = "kees_twitter_field_formatter";
 
     foreach ($items as $delta => $item) {
       $filter = $item->value;
       $count = $item->count;
       if (isset($filter) && $filter != "") {
-        $build["filter"] = $filter;
+        $build["content"]["filter"] = $filter;
         $twitter = new TwitterOAuth($settings['consumer_key'], $settings['consumer_secret'], $settings['oauth_access_token'], $settings['oauth_access_token_secret']);
+
         if ($filter[0] == "@") {
-          $build["attributes"] = "username";
+          $build["content"]["attributes"] = "username";
           $tweets = $twitter->get("statuses/user_timeline", ["screen_name" => $filter, "count" => $count, "lang" => "nl"]);
           foreach ($tweets as $tweet) {
-            $build["tweets"][] = $tweet;
+            $build["content"]["tweets"][] = $tweet;
           }
-          $output[$delta] = $build;
+          $output = $build;
         }
         else {
           $tweets = $twitter->get("search/tweets", ["q" => $filter, "count" => $count, "lang" => "nl"]);
           foreach ($tweets as $tweet) {
-            $build["tweets"][] = $tweet;
+            $build["content"]["tweets"][] = $tweet;
 
           }
-          $build["attributes"] = "hashtag";
-
-          $output[$delta] = $build;
+          $build["content"]["attributes"] = "hashtag";
+          $output = $build;
         }
       }
 
     }
-
     return $output;
 
   }
