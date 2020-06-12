@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\kees_twitter_field\Form;
+namespace Drupal\twitter_field\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class TwitterSettingsForm.
  *
- * @package Drupal\kees_twitter_field\Form
+ * @package Drupal\twitter_field\Form
  */
 class TwitterSettingsForm extends ConfigFormBase {
 
@@ -18,7 +18,7 @@ class TwitterSettingsForm extends ConfigFormBase {
   protected function getEditableConfigNames() {
 
     return [
-      'kees_twitter_field.twitter_api',
+      'twitter_field.twitter_api',
     ];
   }
 
@@ -35,7 +35,7 @@ class TwitterSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $config = $this->config('kees_twitter_field.twitter_api');
+    $config = $this->config('twitter_field.twitter_api');
     $form['oauth_access_token'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Oauth Access Token'),
@@ -79,7 +79,7 @@ class TwitterSettingsForm extends ConfigFormBase {
 
     parent::submitForm($form, $form_state);
 
-    $this->config('kees_twitter_field.twitter_api')
+    $this->config('twitter_field.twitter_api')
       ->set('oauth_access_token', $form_state->getValue('oauth_access_token'))
       ->set('oauth_access_token_secret', $form_state->getValue('oauth_access_token_secret'))
       ->set('consumer_key', $form_state->getValue('consumer_key'))

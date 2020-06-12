@@ -1,29 +1,29 @@
 <?php
 
-namespace Drupal\kees_twitter_field\Plugin\Field\FieldFormatter;
+namespace Drupal\twitter_field\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 /**
- * Field formatter "kees_twitter_field_default".
+ * Field formatter "twitter_field_default".
  *
  * @FieldFormatter(
- *   id = "kees_twitter_field_default",
- *   label = @Translation("Kees Twitter field default"),
+ *   id = "twitter_field_default",
+ *   label = @Translation("Twitter field default"),
  *   field_types = {
- *     "kees_twitter_field",
+ *     "twitter_field",
  *   }
  * )
  */
-class Kees_twitter_fieldDefaultFormatter extends FormatterBase {
+class Twitter_fieldDefaultFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
    */
     public function viewElements(FieldItemListInterface $items, $langcode) {
-        $config = \Drupal::config('kees_twitter_field.twitter_api');
+        $config = \Drupal::config('twitter_field.twitter_api');
         $settings = [];
         $settings['oauth_access_token'] = $config->get('oauth_access_token');
         $settings['oauth_access_token_secret'] = $config->get('oauth_access_token_secret');
@@ -31,7 +31,7 @@ class Kees_twitter_fieldDefaultFormatter extends FormatterBase {
         $settings['consumer_secret'] = $config->get('consumer_secret');
 
         $output = [];
-        $build["#theme"] = "kees_twitter_field_formatter";
+        $build["#theme"] = "twitter_field_formatter";
 
         foreach ($items as $delta => $item) {
         $filter = $item->value;

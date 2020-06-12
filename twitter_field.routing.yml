@@ -1,7 +1,7 @@
-kees_twitter_field.twitter_api:
+twitter_field.twitter_api:
   path: '/admin/config/media/twitter-api'
   defaults:
-    _form: '\Drupal\kees_twitter_field\Form\TwitterSettingsForm'
+    _form: '\Drupal\twitter_field\Form\TwitterSettingsForm'
     _title: 'TwitterSettingsForm'
   requirements:
     _permission: 'access content'
