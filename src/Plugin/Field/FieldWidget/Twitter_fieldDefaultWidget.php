@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\kees_twitter_field\Plugin\Field\FieldWidget;
+namespace Drupal\twitter_field\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Field\WidgetInterface;
@@ -8,17 +8,17 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Field widget "kees_twitter_field_default".
+ * Field widget "twitter_field_default".
  *
  * @FieldWidget(
- *   id = "kees_twitter_field_default",
- *   label = @Translation("Kees Twitter field default"),
+ *   id = "twitter_field_default",
+ *   label = @Translation("Twitter field default"),
  *   field_types = {
- *     "kees_twitter_field",
+ *     "twitter_field",
  *   }
  * )
  */
-class Kees_twitter_fieldDefaultWidget extends WidgetBase implements WidgetInterface {
+class Twitter_fieldDefaultWidget extends WidgetBase implements WidgetInterface {
 
   /**
    * {@inheritdoc}

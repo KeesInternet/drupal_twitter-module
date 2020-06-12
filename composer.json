@@ -1,12 +1,13 @@
 {
-    "name": "keestm/twitter-field",
+    "name": "estdigital/twitter-field",
     "description": "A Drupal 8 module that loads a twitter feed",
     "type": "drupal-module",
     "license": "MIT",
     "minimum-stability": "dev",
     "authors": [
         {
-            "name": "Kees-TM"
+            "name": "Est Digital BV",
+            "role": "Maintainer"
         }
     ],
     "require": {

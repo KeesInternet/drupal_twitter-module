@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\kees_twitter_field\Plugin\Field\FieldType;
+namespace Drupal\twitter_field\Plugin\Field\FieldType;
 
 use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\Field\FieldItemInterface;
@@ -8,18 +8,18 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Field\FieldItemBase;
 
 /**
- * Field type "kees_twitter_field".
+ * Field type "twitter_field".
  *
  * @FieldType(
- *   id = "kees_twitter_field",
+ *   id = "twitter_field",
  *   label = @Translation("Twitter field"),
- *   description = @Translation("Kees Twitter field."),
- *   category = @Translation("Kees fields"),
- *   default_widget = "kees_twitter_field_default",
- *   default_formatter = "kees_twitter_field_default",
+ *   description = @Translation("Twitter field."),
+ *   category = @Translation("fields"),
+ *   default_widget = "twitter_field_default",
+ *   default_formatter = "twitter_field_default",
  * )
  */
-class Kees_twitter_fieldItem extends FieldItemBase implements FieldItemInterface {
+class Twitter_fieldItem extends FieldItemBase implements FieldItemInterface {
 
   /**
    * {@inheritdoc}
