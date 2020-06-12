@@ -3,6 +3,7 @@ type: module
 name: Twitter Field
 description: Custom Twitter field
 core_version_requirement: ^8 || ^9
+configure: twitter_field.twitter_api
 
 # Dependencies
 dependences:
