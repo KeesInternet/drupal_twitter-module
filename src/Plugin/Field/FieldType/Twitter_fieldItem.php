@@ -20,40 +20,34 @@ use Drupal\Core\Field\FieldItemBase;
  * )
  */
 class Twitter_fieldItem extends FieldItemBase implements FieldItemInterface {
+    /**
+     * {@inheritdoc}
+     */
+    public static function schema(FieldStorageDefinitionInterface $field_definition)
+    {
+        $output = [];
+        $output['columns']['value'] = [
+          'type' => 'varchar',
+          'length' => 255,
+        ];
+        $output['columns']['count'] = [
+          'type' => 'varchar',
+          'length' => 255,
+        ];
+        return $output;
+    }
 
-  /**
-   * {@inheritdoc}
-   */
-  public static function schema(FieldStorageDefinitionInterface $field_definition) {
-
-    $output = [];
-    $output['columns']['value'] = [
-      'type' => 'varchar',
-      'length' => 255,
-    ];
-    $output['columns']['count'] = [
-      'type' => 'varchar',
-      'length' => 255,
-    ];
-
-    return $output;
-
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
-
-    $properties['value'] = DataDefinition::create('string')
-      ->setLabel(t('Value'))
-      ->setRequired(FALSE);
-    $properties['count'] = DataDefinition::create('string')
-      ->setLabel(t('Count'))
-      ->setRequired(FALSE);
-
-    return $properties;
-
-  }
-
+    /**
+     * {@inheritdoc}
+     */
+    public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition)
+    {
+        $properties['value'] = DataDefinition::create('string')
+            ->setLabel(t('Value'))
+            ->setRequired(false);
+        $properties['count'] = DataDefinition::create('string')
+            ->setLabel(t('Count'))
+            ->setRequired(false);
+        return $properties;
+    }
 }

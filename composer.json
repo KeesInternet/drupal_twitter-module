@@ -1,6 +1,6 @@
 {
     "name": "estdigital/twitter-field",
-    "description": "A Drupal 8 module that loads a twitter feed",
+    "description": "A Drupal 8 and 9 module that loads a twitter feed",
     "type": "drupal-module",
     "license": "MIT",
     "minimum-stability": "dev",

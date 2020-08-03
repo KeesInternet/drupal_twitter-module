@@ -16,7 +16,8 @@
   <img src="{{ tweet.user.profile_image_url }}">
   <p> {{ tweet.user.name }} <i>@{{ tweet.user.screen_name }}</i></p>
   <p>{{ tweet.text }}</p>
-  <img src="{{ tweet.entities.media.0.media_url }}" height="200px" width="100px">
-
+  {% if tweet.entities.media.0.media_url is defined %}
+    <img src="{{ tweet.entities.media.0.media_url }}" height="200px" width="100px">
+  {% endif %}
 {% endfor %}
 
