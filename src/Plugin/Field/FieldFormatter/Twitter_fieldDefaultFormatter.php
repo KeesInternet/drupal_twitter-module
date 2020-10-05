@@ -55,7 +55,7 @@ class Twitter_fieldDefaultFormatter extends FormatterBase {
                     $build["#type"] = "hashtag";
                     try{
                         $tweets = $twitter->get("search/tweets", ["q" => $filter, "count" => $count, "lang" => "nl"]);
-                        if (is_array($tweets)) {
+                        if (is_object($tweets)) {
                             if (isset($tweets->statuses)) {
                                 foreach ($tweets->statuses as $key => $tweet) {
                                     $build["#tweets"][] = $tweet;
