@@ -19,56 +19,98 @@ use Abraham\TwitterOAuth\TwitterOAuth;
  */
 class Twitter_fieldDefaultFormatter extends FormatterBase {
 
+    private $twitterConnection;
+
+    public function __construct()
+    {
+        // Get the config values from the twitter_field module.
+        $config = \Drupal::config('twitter_field.twitter_api');
+
+        // Create a TwitterOAuth object with consumer/user tokens.
+        $this->twitterConnection = new TwitterOAuth(
+            $config->get('consumer_key'),
+            $config->get('consumer_secret'),
+            $config->get('oauth_access_token'),
+            $config->get('oauth_access_token_secret')
+        );
+    }
+
   /**
    * {@inheritdoc}
    */
     public function viewElements(FieldItemListInterface $items, $langcode)
     {
-        $config = \Drupal::config('twitter_field.twitter_api');
-        $settings = [];
-        $settings['oauth_access_token'] = $config->get('oauth_access_token');
-        $settings['oauth_access_token_secret'] = $config->get('oauth_access_token_secret');
-        $settings['consumer_key'] = $config->get('consumer_key');
-        $settings['consumer_secret'] = $config->get('consumer_secret');
         $output = [];
-        $build["#theme"] = "twitter_field_formatter";
+        $build['#theme'] = 'twitter_field_formatter';
+
+        // Loop trough all the items.
         foreach ($items as $delta => $item) {
             $filter = $item->value;
-            $count = $item->count;
+
+            // Check if item or hashtag is set.
             if (isset($filter) && $filter != "") {
-                $build["#filter"] = $filter;
-                $twitter = new TwitterOAuth($settings['consumer_key'], $settings['consumer_secret'], $settings['oauth_access_token'], $settings['oauth_access_token_secret']);                    
+                $build['#filter'] = $filter[0];
+
+                // Get tweets by filter.
                 if ($filter[0] == "@") {
-                    $build["#type"] = "username";
-                    try{
-                        $tweets = $twitter->get("statuses/user_timeline", ["screen_name" => $filter, "count" => $count, "lang" => "nl"]);
-                        if (is_array($tweets)) {
-                            foreach ($tweets as $key => $tweet) {
-                                $build["#tweets"][] = $tweet;
-                            }
-                        }
-                    }catch(\Abraham\TwitterOAuth\TwitterOAuthException $exception) {
-                        $build["error"] = "No tweets available.";
+                    $build["type"] = "username";
+                    $tweets = $this->getTweetsByUser($filter, $item->count);
+                    if (is_array($tweets)) {
+                        $build["tweets"] = $tweets;
+                    } else {
+                        $build["error"] = $tweets;
                     }
-                    $output[$delta] = $build;
-                } else {                    
-                    $build["#type"] = "hashtag";
-                    try{
-                        $tweets = $twitter->get("search/tweets", ["q" => $filter, "count" => $count, "lang" => "nl"]);
-                        if (is_object($tweets)) {
-                            if (isset($tweets->statuses)) {
-                                foreach ($tweets->statuses as $key => $tweet) {
-                                    $build["#tweets"][] = $tweet;
-                                }
-                            }
-                        }
-                    } catch(\Abraham\TwitterOAuth\TwitterOAuthException $exception) {
-                        $output[$delta]["error"] = "No tweets available.";
-                    }                        
-                    $output[$delta] = $build;
-                }                   
+                } else if ($filter[0] == "#") {
+                    $build["type"] = "hashtag";
+                    $tweets = $this->getTweetsByHashtag($filter, $item->count);
+                    if (isset($tweets) && is_object($tweets)) {
+                        $build["tweets"] = $tweets;
+                    } else {
+                        $build["error"] = $tweets;
+                    }
+                }
+
+                $output[$delta] = $build;
+                
             }
         }
+
         return $output;
+    }
+
+    /**
+     * Get the tweets from the Twitter API by username.
+     */
+    private function getTweetsByUser($username, $tweet_count = 0) {
+        try {
+            return $this->twitterConnection->get(
+                'statuses/user_timeline',
+                [
+                    'screen_name' => $username,
+                    'count' => $tweet_count,
+                    'lang' => 'nl'
+                ],
+            );
+        } catch(\Abraham\TwitterOAuth\TwitterOAuthException $exception) {
+            return "No tweets available from this user.";
+        }
+    }
+
+    /**
+     * Get the tweets from the Twitter API by hashtag.
+     */
+    private function getTweetsByHashtag($hashtag, $tweet_count = 0) {
+        try {
+            return $this->twitterConnection->get(
+                'search/tweets',
+                [
+                    'q' => $hashtag,
+                    'count' => $tweet_count,
+                    'lang' => 'nl'
+                ],
+            )->statuses;
+        } catch(\Abraham\TwitterOAuth\TwitterOAuthException $exception) {
+            return "No tweets available with this hashtag.";
+        }
     }
 }
